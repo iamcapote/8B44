@@ -1,46 +1,57 @@
-title: BITCORE_CORAL_REEF
-description: Knowledge base for BITCORE project
-baseurl: ""
-url: "" 
+title: "The Drift 8B-44"
+description: "Community field guide, character registry, experience archive, and documentation for The Drift."
+url: "https://iamcapote.github.io"
+baseurl: "/8B44"
 
-# Theme (GitHub Pages compatible)
-remote_theme: pages-themes/minimal@v0.2.0
-# For a Wikipedia-like grayscale look, minimal is a good starting point
-
-# Build settings
 markdown: kramdown
 highlighter: rouge
+permalink: pretty
 
-# Only use GitHub Pages supported plugins
 plugins:
-  - jekyll-remote-theme
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-paginate
 
-# Collections for research content
 collections:
-  research:
+  characters:
     output: true
-    permalink: /:collection/:path/
+    permalink: /characters/:name/
+  experiences:
+    output: true
+    permalink: /experiences/:name/
+  tips:
+    output: true
+    permalink: /tips/:name/
 
-# Default layouts
 defaults:
   - scope:
       path: ""
-      type: "research"
+      type: characters
     values:
-      layout: "page"
+      layout: entry
+      entry_type: Character
+  - scope:
+      path: ""
+      type: experiences
+    values:
+      layout: entry
+      entry_type: Experience
+  - scope:
+      path: ""
+      type: tips
+    values:
+      layout: entry
+      entry_type: Tip
   - scope:
       path: ""
     values:
-      layout: "default"
+      layout: default
 
-# Exclude files/folders from build
 exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
   - .sass-cache
   - .jekyll-cache
+  - _site
+  - templates

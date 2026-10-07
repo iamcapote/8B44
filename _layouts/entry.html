@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<article class="entry-page">
+  <p class="eyebrow">{{ page.entry_type | default: page.collection | upcase }}</p>
+  <h1>{{ page.title }}</h1>
+  {% if page.summary %}<p class="lede">{{ page.summary }}</p>{% endif %}
+  <dl class="metadata">
+    {% if page.author %}<dt>Contributor</dt><dd>@{{ page.author }}</dd>{% endif %}
+    {% if page.character %}<dt>Character</dt><dd>{{ page.character }}</dd>{% endif %}
+    {% if page.continuity %}<dt>Continuity</dt><dd>{{ page.continuity }}</dd>{% endif %}
+    {% if page.date %}<dt>Date</dt><dd>{{ page.date | date: "%Y-%m-%d" }}</dd>{% endif %}
+    {% if page.tags and page.tags.size > 0 %}<dt>Tags</dt><dd>{{ page.tags | join: ", " }}</dd>{% endif %}
+  </dl>
+  <div class="prose">{{ content }}</div>
+  <div class="entry-footer"><a href="{{ '/contribute/' | relative_url }}">Add or improve an entry →</a></div>
+</article>

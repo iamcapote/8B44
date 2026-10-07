@@ -1,25 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
   {% include head.html %}
-
   <body>
     <header class="site-header">
-      <div class="header-content">
-        <h1 class="site-title">{{ site.title }}</h1>
-        <p class="site-subtitle">Jekyll GitHub Pages</p>
+      <div class="shell header-inner">
+        <a class="brand" href="{{ '/' | relative_url }}">
+          <span class="brand-mark">8B-44</span>
+          <span class="brand-name">THE DRIFT</span>
+        </a>
+        {% include navigation.html %}
       </div>
-      <!-- Visualization removed from header as requested -->
     </header>
-
-    <main class="container">
-      {{ content }}
-    </main>
-
+    <main class="shell page">{{ content }}</main>
     <footer class="site-footer">
-      {% include visualization.html position="footer" show_symbol=true %}
-      <div class="footer-content">
-        <p class="monospace-data">// BITCORE Intelligence Engine — Recursive Knowledge Field</p>
+      <div class="shell footer-inner">
+        <span>THE DRIFT 8B-44</span>
+        <span>Community-maintained static archive</span>
       </div>
     </footer>
   </body>

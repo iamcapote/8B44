@@ -1,38 +1,34 @@
-# BITCORE CORAL REEF
-Welcome to the BITCORE CORAL REEF project — an example knowledge base created using the BITCORE Research Terminal.
+# The Drift 8B-44
 
-This repository demonstrates how structured research outputs from the BITCORE Research Terminal can be published as dynamic knowledge bases using GitHub Pages and Jekyll.
+Public community site for **The Drift**.
 
-## Project Overview
-BITCORE Research Terminal is a structured cognitive research platform designed for multidisciplinary innovation projects.
-It provides researchers, engineers, and innovators with a powerful environment to organize, structure, and export high-quality research outputs.
+This repository is not the game engine. It is the public layer around the experience: documentation, characters, session records, discoveries, and useful techniques shared by players.
 
-BITCORE CORAL REEF serves as a live case study — showcasing a simulated multidisciplinary project involving oceanography, synthetic biology, and information theory.
+## Site
 
-The intended use case is simple:
+https://iamcapote.github.io/8B44/
 
-Conduct and organize project-specific research inside the BITCORE Research Terminal.
+## What belongs here
 
-Export the structured output.
+- **Experiences** — sessions, discoveries, encounters, stories, screenshots, and memorable moments.
+- **Characters** — characters people want to preserve and share.
+- **Tips & Tricks** — techniques, shortcuts, play styles, and lessons learned.
+- **Docs** — maintained guidance and reference material.
 
-Publish it as a modular GitHub Pages website using Jekyll.
+## Contributing
 
-This process enables teams to build self-hosted knowledge bases for projects like iGEM competitions, synthetic biology labs, multidisciplinary research collectives, and beyond.
+You do not need to know Jekyll.
 
-How It Works
+1. Fork this repository.
+2. Copy the relevant file from `templates/`.
+3. Add your entry to `_experiences/`, `_characters/`, or `_tips/`.
+4. Commit it.
+5. Open a Pull Request.
 
-    BITCORE ResearchTerminal --> OutputExport --> GitHubRepo --> JekyllSite
+Read [CONTRIBUTING.md](CONTRIBUTING.md) for the exact path.
 
-## Live Instances
-BITCORE Research Terminal (MVP Alpha):
-http://159.89.178.2/
+## Principle
 
-Live Coral Reef Knowledge Base:
-https://bitwikiorg.github.io/BITCORE_CORAL_REEF/
+**The Drift creates the experience. This repository records and organizes what people choose to share from it.**
 
-Main BitWiki Portal:
-https://bitwiki.org/
-
-LEARN MORE ABOUT COREBIT SYSTEMS:
-https://system.bitwiki.org/
-
+A merged contribution becomes part of the public archive. It does not automatically become a mandatory fact in every other player's continuity.
