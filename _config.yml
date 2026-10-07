@@ -1,0 +1,46 @@
+title: BITCORE_CORAL_REEF
+description: Knowledge base for BITCORE project
+baseurl: ""
+url: "" 
+
+# Theme (GitHub Pages compatible)
+remote_theme: pages-themes/minimal@v0.2.0
+# For a Wikipedia-like grayscale look, minimal is a good starting point
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Only use GitHub Pages supported plugins
+plugins:
+  - jekyll-remote-theme
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Collections for research content
+collections:
+  research:
+    output: true
+    permalink: /:collection/:path/
+
+# Default layouts
+defaults:
+  - scope:
+      path: ""
+      type: "research"
+    values:
+      layout: "page"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Exclude files/folders from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .sass-cache
+  - .jekyll-cache

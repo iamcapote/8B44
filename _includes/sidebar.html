@@ -1,0 +1,19 @@
+<div class="sidebar-content">
+  <h2>Research Index</h2>
+  
+  <div class="search-container">
+    <input type="text" id="research-search" placeholder="Search research...">
+  </div>
+  
+  <div class="research-list">
+    <ul id="research-items">
+    {% assign sorted_research = site.research | sort: 'date' | reverse %}
+    {% for item in sorted_research %}
+      <li data-title="{{ item.title | downcase }}" data-content="{{ item.content | strip_html | downcase }}">
+        <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+        <span class="date">{{ item.date | date: "%Y-%m-%d" }}</span>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>

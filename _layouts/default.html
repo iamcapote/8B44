@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {% include head.html %}
+
+  <body>
+    <header class="site-header">
+      <div class="header-content">
+        <h1 class="site-title">{{ site.title }}</h1>
+        <p class="site-subtitle">Jekyll GitHub Pages</p>
+      </div>
+      <!-- Visualization removed from header as requested -->
+    </header>
+
+    <main class="container">
+      {{ content }}
+    </main>
+
+    <footer class="site-footer">
+      {% include visualization.html position="footer" show_symbol=true %}
+      <div class="footer-content">
+        <p class="monospace-data">// BITCORE Intelligence Engine — Recursive Knowledge Field</p>
+      </div>
+    </footer>
+  </body>
+</html>

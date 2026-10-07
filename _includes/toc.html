@@ -1,0 +1,50 @@
+{% capture tocWorkspace %}
+    {% comment %}
+        Modified version of kramdown TOC generator
+    {% endcomment %}
+    {% assign minHeader = include.h_min | default: 1 %}
+    {% assign maxHeader = include.h_max | default: 6 %}
+    {% assign nodes = include.html | split: '<h' %}
+    {% assign firstHeader = true %}
+    
+    {% capture my_toc %}{% for node in nodes %}
+        {% if node == "" %}
+            {% continue %}
+        {% endif %}
+        
+        {% assign headerLevel = node | replace: '"', '' | slice: 0, 1 | times: 1 %}
+        
+        {% if headerLevel < minHeader or headerLevel > maxHeader %}
+            {% continue %}
+        {% endif %}
+        
+        {% assign _workspace = node | split: '</h' %}
+        
+        {% assign _idWorkspace = _workspace[0] | split: 'id="' %}
+        {% assign _idWorkspace = _idWorkspace[1] | split: '"' %}
+        {% assign html_id = _idWorkspace[0] %}
+        
+        {% assign _titleWorkspace = _workspace[0] | split: '<a' | first %}
+        {% assign _titleWorkspace = _titleWorkspace | split: '>' | last %}
+        {% assign title = _titleWorkspace | strip_html %}
+        
+        {% assign space = '' %}
+        {% assign space = space | prepend: '    ' %}
+        {% assign indentAmount = headerLevel | minus: minHeader %}
+        {% for i in (1..indentAmount) %}
+            {% assign space = space | prepend: '    ' %}
+        {% endfor %}
+        
+        {% capture my_toc %}{{ my_toc }}
+{{ space }}- [{{ title }}](#{{ html_id }}){% endcapture %}
+        
+    {% endfor %}{% endcapture %}
+
+    {% if include.class %}
+        <div class="{{ include.class }}">
+            {{ my_toc | markdownify }}
+        </div>
+    {% else %}
+        {{ my_toc | markdownify }}
+    {% endif %}
+{% endcapture %}{{ tocWorkspace | strip }}

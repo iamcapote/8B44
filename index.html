@@ -1,0 +1,115 @@
+---
+layout: default
+title: BITCORE Knowledge Base
+---
+
+<div class="content-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h2>RESEARCH</h2>
+      <nav class="nav-primary">
+        <ul>
+          <li><a href="#overview" class="nav-item active"><span class="nav-icon">◯</span> Overview</a></li>
+          {% assign topics = "" | split: "" %}
+          {% assign research_files = site.static_files | where_exp: "file", "file.path contains '/research/'" %}
+          {% for file in research_files %}
+            {% if file.extname == '.md' %}
+              {% assign filename = file.path | split: '/' | last %}
+              {% assign parts = filename | remove: '.md' | split: '-' %}
+              {% if parts.size > 1 %}
+                {% assign topic = parts[1] | capitalize %}
+                {% unless topics contains topic %}
+                  {% assign topics = topics | push: topic %}
+                  <li><a href="#{{ topic | slugify }}" class="nav-item"><span class="nav-icon">◯</span> {{ topic }}</a></li>
+                {% endunless %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>Latest Research</h2>
+      <nav class="nav-research">
+        <ul>
+          {% assign sorted_files = site.static_files | where_exp: "file", "file.path contains '/research/'" | sort: "path" | reverse | limit: 5 %}
+          {% for file in sorted_files %}
+            {% if file.extname == '.md' %}
+              {% assign filename = file.path | split: '/' | last %}
+              {% assign parts = filename | remove: '.md' | split: '-' %}
+              {% if parts.size > 1 %}
+                <li>
+                  <a href="{{ file.path | relative_url }}" class="research-nav-link">
+                    {{ parts[1] | capitalize }}
+                  </a>
+                </li>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="page-header">
+      <h1 class="page-title">BITCORE_CORAL_REEF</h1>
+    </header>
+    
+    <div class="page-intro">
+      <p>BITCORE Coral Reef is a deep systems project merging synthetic biology, symbiotic engineering, and recursive intelligence architecture. This knowledge base functions as an externalized cognitive layer for BITCORE, capturing research, design schematics, and system frameworks for the Coral Holobiont Synthetic Enhancement initiative.</p>
+      <p>The mission of the BITCORE Coral Reef Project is to design and develop adaptive symbiotic systems to regenerate, protect, and evolve coral reef ecosystems. Using modular engineered symbionts—bacteria, algae, and microbial networks—this project integrates principles of environmental sensing, stress mitigation, bioluminescence-based recruitment, and ecosystem feedback stabilization.</p>
+      <p>Each research node hosted here represents an actionable unit in the recursive assembly of the system. From synthetic plasmid designs to symbiotic behavioral modeling, the knowledge base evolves dynamically alongside ongoing experimental research.</p>
+        </div>
+
+    <section id="overview" class="content-section">
+      <h2 class="section-title">Overview</h2>
+      <p>This knowledge repository hosts research outputs generated through the BITCORE Research Terminal, a recursive intelligence engine designed for deep, structured exploration. Each document represents a live node in the evolving Coral Holobiont Synthetic System framework, autonomously indexed to reflect the expanding knowledge architecture of the project.</p>
+    </section>
+
+    <section id="research-index" class="content-section">
+      <h2 class="section-title">Research Index</h2>
+      
+      {% assign grouped_files = research_files | group_by_exp: "file", "file.path | split: '/' | last | remove: '.md' | split: '-' | slice: 1 | first | capitalize" %}
+      
+      {% for group in grouped_files %}
+        {% if group.name != "" %}
+        <div id="{{ group.name | slugify }}" class="research-topic">
+          <h3>{{ group.name }}</h3>
+          <ul class="research-list">
+            {% assign sorted_group_items = group.items | sort: "path" | reverse %}
+            {% for file in sorted_group_items %}
+              {% if file.extname == '.md' %}
+                {% assign filename = file.path | split: '/' | last %}
+                {% assign parts = filename | remove: '.md' | split: '-' %}
+                {% if parts.size > 2 %}
+                  {% assign date_parts = parts[2] | split: 'T' %}
+                  {% if date_parts.size > 0 %}
+                    {% assign date_formatted = date_parts[0] %}
+                  {% else %}
+                    {% assign date_formatted = parts[2] %}
+                  {% endif %}
+                  <li class="research-item">
+                    <a href="{{ file.path | relative_url }}" class="research-link">
+                      <span class="research-title">{{ parts[1] | capitalize }}</span>
+                      <span class="research-date">{{ date_formatted }}</span>
+                    </a>
+                  </li>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </section>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="bitcore-symbol">●</div>
+    <div class="footer-text">BITCORE_CORAL_REEF // {{ site.time | date: '%Y-%m-%d' }}</div>
+  </div>
+</footer>

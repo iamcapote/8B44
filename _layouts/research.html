@@ -1,0 +1,98 @@
+---
+layout: default
+---
+
+<div class="content-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h2>RESEARCH</h2>
+      <nav class="nav-primary">
+        <ul>
+          <li><a href="{{ '/' | relative_url }}#overview" class="nav-item"><span class="nav-icon">◯</span> Overview</a></li>
+          {% assign topics = "" | split: "" %}
+          {% assign research_files = site.static_files | where_exp: "file", "file.path contains '/research/'" %}
+          {% for file in research_files %}
+            {% if file.extname == '.md' %}
+              {% assign filename = file.path | split: '/' | last %}
+              {% assign parts = filename | remove: '.md' | split: '-' %}
+              {% if parts.size > 1 %}
+                {% assign topic = parts[1] | capitalize %}
+                {% unless topics contains topic %}
+                  {% assign topics = topics | push: topic %}
+                  <li>
+                    <a href="{{ '/' | relative_url }}#{{ topic | slugify }}" class="nav-item 
+                      {% if page.path contains parts[1] %}active{% endif %}">
+                      <span class="nav-icon">◯</span> {{ topic }}
+                    </a>
+                  </li>
+                {% endunless %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="sidebar-section">
+      <h2>Related Research</h2>
+      <nav class="nav-contents">
+        <ul>
+          {% assign current_path = page.path | split: '/' | last %}
+          {% assign current_parts = current_path | remove: '.md' | split: '-' %}
+          {% assign current_topic = current_parts[1] | capitalize %}
+          
+          {% assign related_files = site.static_files | where_exp: "file", "file.path contains '/research/'" | sort: "path" | reverse %}
+          {% for file in related_files %}
+            {% if file.extname == '.md' %}
+              {% assign filename = file.path | split: '/' | last %}
+              {% if filename != current_path %}
+                {% assign parts = filename | remove: '.md' | split: '-' %}
+                {% assign topic = parts[1] | capitalize %}
+                {% if topic == current_topic and parts.size > 1 %}
+                  <li>
+                    <a href="{{ file.path | relative_url }}">{{ parts[1] | capitalize }}</a>
+                  </li>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <article class="research-article">
+      <header class="article-header">
+        {% assign filename = page.path | split: '/' | last %}
+        {% assign parts = filename | remove: '.md' | split: '-' %}
+        {% if parts.size > 1 %}
+          <h1 class="article-title">{{ parts[1] | capitalize }}</h1>
+          {% if parts.size > 2 %}
+            {% assign date_parts = parts[2] | split: 'T' %}
+            {% if date_parts.size > 0 %}
+              <time datetime="{{ date_parts[0] }}" class="article-date">{{ date_parts[0] }}</time>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      </header>
+
+      <div class="article-content">
+        {{ content }}
+      </div>
+      
+      <footer class="article-footer">
+        <div class="recursive-links">
+          <a href="{{ '/' | relative_url }}" class="back-link">← Return to Index</a>
+        </div>
+      </footer>
+    </article>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="bitcore-symbol">●</div>
+    <div class="footer-text">BITCORE_CORAL_REEF // {{ site.time | date: '%Y-%m-%d' }}</div>
+  </div>
+</footer>
